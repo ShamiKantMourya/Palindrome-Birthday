@@ -5,6 +5,42 @@ body {
     background-color: #5451A6;
 }
 
+/* container section */
+.container {
+    text-align: center;
+    color: #fff;
+    margin: 10% 20%;
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
+
+.container h2 {
+    font-weight: bold;
+    margin: 35px;
+}
+
+.header {
+    font-weight: bold;
+}
+
+#input {
+    margin: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #5451A6;
+    padding: 3px;
+}
+
+#btn {
+    color: #5451A6;
+    background-color: #fff;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 20px;
+    ;
+}
+
 /* footer-section */
 .footer {
     text-align: center;
