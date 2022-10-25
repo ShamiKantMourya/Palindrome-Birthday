@@ -80,21 +80,57 @@ function leapYear(year) {
     return false;
 }
 
-function nextDate(date) {
+function getNextDate(date) {
     var day = date.day + 1;
     var month = date.month;
     var year = date.year;
 
-    var daysInMonth = [31, 28, 31, 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31]
+    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    
+    if (month == 2) {
+        if (leapYear(year)) {
+            if (day > 29) {
+                day = 1;
+                month++;
+            } else {
+                if (day > 28) {
+                    day = 1;
+                    month++;
+                }
+            }
+        } else {
+            if (day > daysInMonth[month - 1]) {
+                day = 1;
+                month++;
+            }
+        }
+    }
+    if (month > 12) {
+        month = 1;
+        year++;
+    }
+
+    return {
+        day: day,
+        month: month,
+        year: year
+    };
 }
-var date = {
-    day: 5,
-    month: 9,
-    year: 1999
+
+function getNextPalindromeDate(date) {
+    var ctr = 0;
+    var nextDate = getNextDate(date);
+
+    while (1) {
+        ctr++;
+        var isPalindrome = checkPalindromeForAllDateFormats(nextDate);
+        if (isPalindrome) {
+            break;
+        }
+        nextDate = getNextDate(date);
+    }
+    return [ctr, nextDate];
 }
-console.log(checkPalindromeForAllDateFormats(date));
 
 function clickHandler(event) {
     var birthdayStr = inputArea.value;
@@ -106,7 +142,13 @@ function clickHandler(event) {
             month: Number(dateList[1]),
             year: Number(dateList[0])
         };
+        var isPalindrome = checkPalindromeForAllDateFormats(date);
+        if (isPalindrome) {
+            outputArea.innerText = "Congrats..!🥳 Your birthdate is a palindrome date."
+        } else {
+            var [ctr, nextDate] = getNextPalindromeDate(date);
+            outputArea.innerText = `The next palindrome date is ${nextDate.day}--${nextDate.month}--${nextDate.year}, you missed it by ${ctr}`
+        }
     }
-    console.log(date);
 }
 checkButton.addEventListener('click', clickHandler)
