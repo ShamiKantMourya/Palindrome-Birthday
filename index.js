@@ -18,18 +18,72 @@ function isPalindrome(str) {
     }
 }
 
+function changeDateIntoString(date) {
+    var dateStr = {
+        day: '',
+        month: '',
+        year: ''
+    };
+
+    if (date.day < 10) {
+        dateStr.day = '0' + date.day;
+    } else {
+        dateStr.day = date.day.toString();
+    }
+    if (date.month < 10) {
+        dateStr.month = '0' + date.month;
+    } else {
+        dateStr.month = date.month.toString();
+    }
+    dateStr.year = date.year.toString();
+
+    return dateStr;
+}
+
+
+function getAllFormatsDate(date) {
+    var dateStr = changeDateIntoString(date);
+    var ddmmyyyy = dateStr.day + dateStr.month + dateStr.year;
+    var mmddyyyy = dateStr.month + dateStr.day + dateStr.year;
+    var yyyymmdd = dateStr.year + dateStr.month + dateStr.day;
+    var ddmmyy = dateStr.day + dateStr.month + dateStr.year.slice(-2);
+    var mmddyy = dateStr.month + dateStr.day + dateStr.year.slice(-2);
+    var yymmdd = dateStr.year.slice(-2) + dateStr.month + dateStr.day;
+
+    return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yymmdd];
+}
+
+function checkPalindromeForAllDateFormats(date) {
+    var palindromeList = getAllFormatsDate(date);
+
+    var palindrome = false;
+
+    for (var index = 0; index < palindromeList.length; index++) {
+        if (isPalindrome(palindromeList[index])) {
+            palindrome = true;
+            break;
+        }
+    }
+    return palindrome;
+}
+var date = {
+    day: 5,
+    month: 9,
+    year: 1999
+}
+console.log(checkPalindromeForAllDateFormats(date));
 
 function clickHandler(event) {
     var birthdayStr = inputArea.value;
-if (birthdayStr !== '') {
-    var dateList = birthdayStr.split('-');
+    if (birthdayStr !== '') {
+        var dateList = birthdayStr.split('-');
 
-    var date = {
-        day: Number(dateList[2]),
-        month: Number(dateList[1]),
-        year: Number(dateList[0])
-    };
+        var date = {
+            day: Number(dateList[2]),
+            month: Number(dateList[1]),
+            year: Number(dateList[0])
+        };
+    }
+    console.log(date);
 }
-console.log(date);
-}
-checkButton.addEventListener('click',clickHandler)
+checkButton.addEventListener('click', clickHandler)
