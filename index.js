@@ -1,7 +1,3 @@
-const inputArea = document.querySelector("#input");
-const checkButton = document.querySelector("#btn");
-const outputArea = document.querySelector("#output");
-
 function reverseStr(str) {
     var listOfCharacters = str.split('');
     var reverseCharList = listOfCharacters.reverse();
@@ -131,7 +127,16 @@ function getNextPalindromeDate(date) {
     }
     return [ctr, nextDate];
 }
+var date = {
+    day: 13,
+    month:9,
+    year:2020
+}
+const inputArea = document.querySelector("#input");
+const checkButton = document.querySelector("#btn");
+const outputArea = document.querySelector("#output");
 
+console.log(getNextPalindromeDate(date));
 function clickHandler(event) {
     var birthdayStr = inputArea.value;
     if (birthdayStr !== '') {
@@ -151,4 +156,4 @@ function clickHandler(event) {
         }
     }
 }
-checkButton.addEventListener('click', clickHandler)
+checkButton.addEventListener('click', clickHandler);
