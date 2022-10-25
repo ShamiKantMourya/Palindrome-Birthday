@@ -66,6 +66,29 @@ function checkPalindromeForAllDateFormats(date) {
     }
     return palindrome;
 }
+
+function leapYear(year) {
+    if (year % 400 === 0) {
+        return true;
+    }
+    if (year % 100 === 0) {
+        return false;
+    }
+    if (year % 4 === 0) {
+        return true;
+    }
+    return false;
+}
+
+function nextDate(date) {
+    var day = date.day + 1;
+    var month = date.month;
+    var year = date.year;
+
+    var daysInMonth = [31, 28, 31, 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31]
+
+    
+}
 var date = {
     day: 5,
     month: 9,
