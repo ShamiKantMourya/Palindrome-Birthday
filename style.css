@@ -38,14 +38,16 @@ body {
     padding: 5px 10px;
     border-radius: 10px;
     margin: 20px;
-    
+
 }
+
 #output {
     text-align: center;
     border: 1px solid #fff;
     border-radius: 8px;
     color: #fff;
     margin: 10% 20%;
+    padding: 0px 10px;
 }
 
 /* footer-section */
