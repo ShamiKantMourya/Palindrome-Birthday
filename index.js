@@ -52,15 +52,15 @@ function getAllFormatsDate(date) {
 function checkPalindromeForAllDateFormats(date) {
     var palindromeList = getAllFormatsDate(date);
 
-    var palindrome = false;
+    var palindromeNumber = false;
 
-    for (var index = 0; index < palindromeList.length; index++) {
-        if (isPalindrome(palindromeList[index])) {
-            palindrome = true;
+    for (var i = 0; i < palindromeList.length; i++) {
+        if (isPalindrome(palindromeList[i])) {
+            palindromeNumber = true;
             break;
         }
     }
-    return palindrome;
+    return palindromeNumber;
 }
 
 function leapYear(year) {
@@ -83,28 +83,30 @@ function getNextDate(date) {
 
     var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    if (month == 2) {
+    if (month === 2) {
         if (leapYear(year)) {
             if (day > 29) {
                 day = 1;
                 month++;
-            } else {
-                if (day > 28) {
-                    day = 1;
-                    month++;
-                }
             }
         } else {
-            if (day > daysInMonth[month - 1]) {
+            if (day > 28) {
                 day = 1;
                 month++;
             }
         }
+    } else {
+        if (day > daysInMonth[month - 1]) {
+            day = 1;
+            month++;
+        }
     }
+
     if (month > 12) {
         month = 1;
         year++;
     }
+
 
     return {
         day: day,
@@ -113,30 +115,27 @@ function getNextDate(date) {
     };
 }
 
+
 function getNextPalindromeDate(date) {
-    var ctr = 0;
     var nextDate = getNextDate(date);
+    var counter = 0;
 
     while (1) {
-        ctr++;
+        counter++;
         var isPalindrome = checkPalindromeForAllDateFormats(nextDate);
+
         if (isPalindrome) {
             break;
         }
-        nextDate = getNextDate(date);
+        nextDate = getNextDate(nextDate);
     }
-    return [ctr, nextDate];
+    return [counter, nextDate];
 }
-var date = {
-    day: 13,
-    month:9,
-    year:2020
-}
+
 const inputArea = document.querySelector("#input");
 const checkButton = document.querySelector("#btn");
 const outputArea = document.querySelector("#output");
 
-console.log(getNextPalindromeDate(date));
 function clickHandler(event) {
     var birthdayStr = inputArea.value;
     if (birthdayStr !== '') {
@@ -151,8 +150,8 @@ function clickHandler(event) {
         if (isPalindrome) {
             outputArea.innerText = "Congrats..!🥳 Your birthdate is a palindrome date."
         } else {
-            var [ctr, nextDate] = getNextPalindromeDate(date);
-            outputArea.innerText = `The next palindrome date is ${nextDate.day}--${nextDate.month}--${nextDate.year}, you missed it by ${ctr}`
+            var [counter, nextDate] = getNextPalindromeDate(date);
+            outputArea.innerText = `The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${counter} `;
         }
     }
 }
